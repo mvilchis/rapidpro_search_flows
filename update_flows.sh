@@ -42,7 +42,7 @@ function get_json_flow() {
     json_flow=`curl -s -H "Accept:application/json"\
           -H "content-type: application/json"\
           -H "Authorization: token  $TOKEN"\
-          "$URL_DESCRIPTION_FLOW?flow=$uuid_flow"`
+          "$URL_DESCRIPTION_FLOW?flow=$uuid_flow&dependencies=none"`
     echo $json_flow > "mx/$uuid_flow.json"
   fi
 }

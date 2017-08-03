@@ -1,10 +1,9 @@
 #! /bin/bash 
-pattern_to_search="á|é|í|ó|ú|ñ"
 
 ls mx/*.json|\
 while read flow_name; do\
- has_pattern=`cat $flow_name| jq '.flows[]|.action_sets'| grep -Eo "$pattern_to_search"|tr "\n" " "`; \
+ has_pattern=`cat $flow_name|jq '.flows[]|.action_sets[]|.actions[]|.msg["spa"]'|awk '{if (length($0) > 150) {print $0}}'`
  if [ ! -z "$has_pattern" ];\
-          then echo "$flow_name -> $has_pattern";\
+          then echo "$has_pattern $flow_name";\
           fi; \
 done
