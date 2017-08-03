@@ -10,7 +10,7 @@ ls mx/*.json|\
        rule_squotes=`echo $rule|sed 's/"//g'`
       action_set=`cat $id_flow|\
         jq -c --arg v "$rule_squotes" '.flows[]|.action_sets[]|select(.destination != null)|select(.destination|contains($v))'`
-      echo $action_set|jq '.actions[]|.msg|.spa'|sed 's/"//g'|awk -v FS="\n" '{split($1,a,"?");print a[2]}'
+      echo $action_set|jq '.actions[]|.msg|.spa'|sed 's/"//g'|awk -v FS="\n" '{n=split($1,a,"?");print a[n]}'
      done;
    fi;
  done
